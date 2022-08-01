@@ -7,11 +7,20 @@ const instance = axios.create({
 
 export const Requests = {
     getImages () {
-        return instance.get()
+        return instance.get(`?albumId=1`)
         .then(response => {
             return response.data
         })
     },
+
+    // getSelected(arr) {
+    //     const queryString = arr.map(id => `id=${id}`).join('&');
+    //     console.log(queryString);
+    //     return instance.get(`?${queryString}`).
+    //     then(response => {
+    //         return response.data
+    //     })
+    // },
 
     getItemInfo (itemID) {
         return instance.get(`/${itemID}`)

@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { Requests } from '../API/requests';
 
-const ItemInfo = ({}) => {
+const ItemInfo = () => {
 
     const navigate = useNavigate();
     const params = useParams();
@@ -16,12 +16,13 @@ const ItemInfo = ({}) => {
             .then(res => setItem(res))
     }, [])
 
+
     return (
         <Container className='itemInfo'>
             <Button variant="outline-primary"
                 onClick={()=> navigate(-1)}
             > 
-                Back to search 
+                Go back
             </Button>
 
             <div className="itemBody">

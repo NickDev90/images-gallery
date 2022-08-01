@@ -1,28 +1,33 @@
-import {useState} from 'react';
+import {memo, useEffect, useState} from 'react';
 
 
 
-const Checkbox = ({checkedCount, setCheckedCount}) => {
+const Checkbox = ({memoizedAddHandler, memoizedRemoveHandler, checkedItems, id}) => {
 
     const [checked, setChecked] = useState(false);
 
-    const handleChange = () => {
-      setChecked(!checked);
-      if(!checked) setCheckedCount(checkedCount + 1);
-      if(checked) setCheckedCount(checkedCount -1);
-    };
+    useEffect(() => {
+      if(checkedItems && checkedItems.includes(id)) setChecked(!checked)
+    }, [])
 
+
+    const handleChange = (e) => {
+      setChecked(!checked);
+      if(!checked) memoizedAddHandler(+e.target.value);
+      if(checked) memoizedRemoveHandler(+e.target.value);
+    };
   
     return (
         <div className="checkBox">
             <label>
                 <input type="checkbox"
                 checked={checked}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                value={id}/>
                 Select this image
             </label>
         </div>
     );
 };
 
-export default Checkbox;
+export default memo(Checkbox);
